@@ -2,22 +2,32 @@
   "config": {
     "step": {
       "user": {
-        "title": "Set up Xiaomi Mi Smart Pedestal Fan",
-        "description": "Enter the IP address and token of your fan. Use the [Xiaomi Cloud Tokens Extractor](https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor) to retrieve your token.",
+        "title": "Connect to Xiaomi Mi Smart Pedestal Fan",
+        "description": "Enter the IP address and token of your fan. See the README for instructions on how to retrieve your token.",
         "data": {
-          "host": "IP Address",
+          "host": "Host",
           "token": "Token",
           "name": "Name",
-          "model": "Model (leave empty for auto-detection)"
+          "model": "Model",
+          "retries": "Retries"
+        }
+      },
+      "reconfigure": {
+        "title": "Reconfigure Xiaomi Mi Smart Pedestal Fan",
+        "description": "Update the connection details for your fan.",
+        "data": {
+          "host": "Host",
+          "token": "Token",
+          "model": "Model"
         }
       }
     },
     "error": {
-      "cannot_connect": "Failed to connect to the device. Please check the IP address and token.",
-      "unknown": "Unexpected error occurred."
+      "cannot_connect": "Failed to connect to the device. Please check host and token."
     },
     "abort": {
-      "already_configured": "This device is already configured."
+      "already_configured": "Device is already configured.",
+      "reconfigure_successful": "Re-configuration was successful."
     }
   },
   "options": {
@@ -25,8 +35,163 @@
       "init": {
         "title": "Xiaomi Fan Options",
         "data": {
-          "retries": "Number of retries on connection error",
-          "preset_modes_override": "Preset modes override (comma-separated list, or leave empty for defaults)"
+          "preset_modes_override": "Preset modes override"
+        }
+      }
+    }
+  },
+  "services": {
+    "fan_set_buzzer": {
+      "name": "Set buzzer",
+      "description": "Turn the buzzer on or off.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "enabled": {
+          "name": "Enabled",
+          "description": "True to turn the buzzer on, false to turn it off."
+        }
+      }
+    },
+    "fan_set_child_lock": {
+      "name": "Set child lock",
+      "description": "Turn the child lock on or off.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "enabled": {
+          "name": "Enabled",
+          "description": "True to turn the child lock on, false to turn it off."
+        }
+      }
+    },
+    "fan_set_natural_mode": {
+      "name": "Set natural mode",
+      "description": "Turn the natural mode on or off.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "enabled": {
+          "name": "Enabled",
+          "description": "True to turn natural mode on, false to turn it off."
+        }
+      }
+    },
+    "fan_set_vertical_oscillation": {
+      "name": "Set vertical oscillation",
+      "description": "Turn the vertical oscillation on or off. (P70 and P76 only)",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "enabled": {
+          "name": "Enabled",
+          "description": "True to turn vertical oscillation on, false to turn it off."
+        }
+      }
+    },
+    "fan_set_anion": {
+      "name": "Set anion",
+      "description": "Turn the anion (ionizer) on or off. (ZA5 only)",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "enabled": {
+          "name": "Enabled",
+          "description": "True to turn anion on, false to turn it off."
+        }
+      }
+    },
+    "fan_set_led_brightness": {
+      "name": "Set LED brightness",
+      "description": "Set the LED brightness.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "brightness": {
+          "name": "Brightness",
+          "description": "Brightness (0 = Bright, 1 = Dim, 2 = Off)"
+        }
+      }
+    },
+    "fan_set_raw_led_brightness": {
+      "name": "Set raw LED brightness",
+      "description": "Set the raw LED brightness value (0-100). (ZA5 only)",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "brightness": {
+          "name": "Brightness",
+          "description": "Raw brightness value (0 = off, 1-100 = on)."
+        }
+      }
+    },
+    "fan_set_oscillation_angle": {
+      "name": "Set oscillation angle",
+      "description": "Set the oscillation angle.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "angle": {
+          "name": "Angle",
+          "description": "Supported angles are 30, 60, 90, 120, 140 or 150 degrees."
+        }
+      }
+    },
+    "fan_set_delay_off": {
+      "name": "Set delay off",
+      "description": "Set the scheduled turn off time.",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "delay_off_countdown": {
+          "name": "Delay off countdown",
+          "description": "Time in minutes. Valid values are 0, 60, 120, 180, 240, 300, 240, 300, 360, 420, 480 minutes."
+        }
+      }
+    },
+    "fan_turn": {
+      "name": "Turn",
+      "description": "Turn to the given direction. (P76 only)",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "direction": {
+          "name": "Direction",
+          "description": "Supported values are left, right, up and down."
+        }
+      }
+    },
+    "fan_set_vertical_oscillation_angle": {
+      "name": "Set vertical oscillation angle",
+      "description": "Set the vertical oscillation angle. (P70 and P76 only)",
+      "fields": {
+        "entity_id": {
+          "name": "Entity ID",
+          "description": "Name of the Xiaomi Mi Smart Fan entity."
+        },
+        "vertical_angle": {
+          "name": "Vertical angle",
+          "description": "Supported values are 30, 60, 90 or 100 degrees."
         }
       }
     }

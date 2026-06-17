@@ -1,6 +1,6 @@
-fan_set_buzzer_on:
-  name: Set buzzer on
-  description: Turn the buzzer on.
+fan_set_buzzer:
+  name: Set buzzer
+  description: Turn the buzzer on or off.
   fields:
     entity_id:
       name: Entity ID
@@ -9,10 +9,16 @@ fan_set_buzzer_on:
         entity:
           integration: xiaomi_miio_fan
           domain: fan
+    enabled:
+      name: Enabled
+      description: True to turn the buzzer on, false to turn it off.
+      example: true
+      selector:
+        boolean:
 
-fan_set_buzzer_off:
-  name: Set buzzer off
-  description: Turn the buzzer off.
+fan_set_child_lock:
+  name: Set child lock
+  description: Turn the child lock on or off.
   fields:
     entity_id:
       name: Entity ID
@@ -21,10 +27,16 @@ fan_set_buzzer_off:
         entity:
           integration: xiaomi_miio_fan
           domain: fan
+    enabled:
+      name: Enabled
+      description: True to turn the child lock on, false to turn it off.
+      example: true
+      selector:
+        boolean:
 
-fan_set_child_lock_on:
-  name: Set child lock on
-  description: Turn the child lock on.
+fan_set_natural_mode:
+  name: Set natural mode
+  description: Turn the natural mode on or off.
   fields:
     entity_id:
       name: Entity ID
@@ -33,10 +45,16 @@ fan_set_child_lock_on:
         entity:
           integration: xiaomi_miio_fan
           domain: fan
+    enabled:
+      name: Enabled
+      description: True to turn natural mode on, false to turn it off.
+      example: true
+      selector:
+        boolean:
 
-fan_set_child_lock_off:
-  name: Set child lock off
-  description: Turn the child lock off.
+fan_set_vertical_oscillation:
+  name: Set vertical oscillation
+  description: Turn the vertical oscillation on or off. (P70 and P76 only)
   fields:
     entity_id:
       name: Entity ID
@@ -45,6 +63,30 @@ fan_set_child_lock_off:
         entity:
           integration: xiaomi_miio_fan
           domain: fan
+    enabled:
+      name: Enabled
+      description: True to turn vertical oscillation on, false to turn it off.
+      example: true
+      selector:
+        boolean:
+
+fan_set_anion:
+  name: Set anion
+  description: Turn the anion (ionizer) on or off. (ZA5 only)
+  fields:
+    entity_id:
+      name: Entity ID
+      description: Name of the Xiaomi Mi Smart Fan entity.
+      selector:
+        entity:
+          integration: xiaomi_miio_fan
+          domain: fan
+    enabled:
+      name: Enabled
+      description: True to turn anion on, false to turn it off.
+      example: true
+      selector:
+        boolean:
 
 fan_set_led_brightness:
   name: Set LED brightness
@@ -62,9 +104,9 @@ fan_set_led_brightness:
       description: Brightness (0 = Bright, 1 = Dim, 2 = Off)
       example: 1
 
-fan_set_natural_mode_on:
-  name: Set natural mode on
-  description: Turn the natural mode on.
+fan_set_raw_led_brightness:
+  name: Set raw LED brightness
+  description: Set the raw LED brightness value (0-100). (ZA5 only)
   fields:
     entity_id:
       name: Entity ID
@@ -73,18 +115,10 @@ fan_set_natural_mode_on:
         entity:
           integration: xiaomi_miio_fan
           domain: fan
-
-fan_set_natural_mode_off:
-  name: Set natural mode off
-  description: Turn the natural mode off.
-  fields:
-    entity_id:
-      name: Entity ID
-      description: Name of the Xiaomi Mi Smart Fan entity.
-      selector:
-        entity:
-          integration: xiaomi_miio_fan
-          domain: fan
+    brightness:
+      name: Brightness
+      description: Raw brightness value (0 = off, 1-100 = on).
+      example: 50
 
 fan_set_oscillation_angle:
   name: Set oscillation angle
@@ -117,30 +151,6 @@ fan_set_delay_off:
       name: Delay off countdown
       description: Time in minutes. Valid values are 0, 60, 120, 180, 240, 300, 240, 300, 360, 420, 480 minutes.
       example: 60
-
-fan_set_vertical_oscillation_on:
-  name: Set vertical oscillation on
-  description: Turn the vertical oscillation on. (P70 and P76 only)
-  fields:
-    entity_id:
-      name: Entity ID
-      description: Name of the Xiaomi Mi Smart Fan entity.
-      selector:
-        entity:
-          integration: xiaomi_miio_fan
-          domain: fan
-
-fan_set_vertical_oscillation_off:
-  name: Set vertical oscillation off
-  description: Turn the vertical oscillation off. (P70 and P76 only)
-  fields:
-    entity_id:
-      name: Entity ID
-      description: Name of the Xiaomi Mi Smart Fan entity.
-      selector:
-        entity:
-          integration: xiaomi_miio_fan
-          domain: fan
 
 fan_turn:
   name: Turn

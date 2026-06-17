@@ -1,14 +1,19 @@
 """Constants for the Xiaomi Mi Smart Pedestal Fan integration."""
 
+from homeassistant.const import Platform
+
 DOMAIN = "xiaomi_miio_fan"
-DATA_KEY = "fan.xiaomi_miio_fan"
+PLATFORMS = [Platform.FAN]
 
 DEFAULT_NAME = "Xiaomi Miio Fan"
-DEFAULT_RETRIES = 20
+DEFAULT_RETRIES = 3
 
 CONF_MODEL = "model"
 CONF_RETRIES = "retries"
 CONF_PRESET_MODES_OVERRIDE = "preset_modes_override"
+CONF_MAC = "mac"
+CONF_FIRMWARE_VERSION = "firmware_version"
+CONF_HARDWARE_VERSION = "hardware_version"
 
 MODEL_FAN_V2 = "zhimi.fan.v2"
 MODEL_FAN_V3 = "zhimi.fan.v3"
@@ -31,27 +36,3 @@ MODEL_FAN_P76 = "xiaomi.fan.p76"
 MODEL_FAN_P70 = "xiaomi.fan.p70"
 MODEL_FAN_LESHOW_SS4 = "leshow.fan.ss4"
 MODEL_FAN_1C = "dmaker.fan.1c"
-
-SUPPORTED_MODELS = [
-    MODEL_FAN_V2,
-    MODEL_FAN_V3,
-    MODEL_FAN_SA1,
-    MODEL_FAN_ZA1,
-    MODEL_FAN_ZA3,
-    MODEL_FAN_ZA4,
-    MODEL_FAN_ZA5,
-    MODEL_FAN_P5,
-    MODEL_FAN_P8,
-    MODEL_FAN_P9,
-    MODEL_FAN_P10,
-    MODEL_FAN_P11,
-    MODEL_FAN_P15,
-    MODEL_FAN_P18,
-    MODEL_FAN_P30,
-    MODEL_FAN_P33,
-    MODEL_FAN_P39,
-    MODEL_FAN_P76,
-    MODEL_FAN_P70,
-    MODEL_FAN_LESHOW_SS4,
-    MODEL_FAN_1C,
-]
